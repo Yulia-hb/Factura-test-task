@@ -4,13 +4,12 @@ using UnityEngine.UIElements;
 
 public class RoadLooper : MonoBehaviour
 {
-    [SerializeField] private Transform playerCar;       // car
-    [SerializeField] private Transform[] roadSegments;  // segment prefabs
-    private float[] segmentLengths;                     // length of each segment
+    [SerializeField] private Transform playerCar; 
+    [SerializeField] private Transform[] roadSegments;
+    private float[] segmentLengths;                     
 
     private void Start()
     {
-        //Determine the length of each segment automatically
          segmentLengths = new float[roadSegments.Length];
 
         for (int i = 0; i < roadSegments.Length; i++)
@@ -18,13 +17,9 @@ public class RoadLooper : MonoBehaviour
             MeshRenderer mr = roadSegments[i].GetComponentInChildren<MeshRenderer>();
             if (mr != null)
             {
-                segmentLengths[i] = mr.bounds.size.z; // actual length of the segment in Z
+                segmentLengths[i] = mr.bounds.size.z;
             }
-            //else
-            //{
-            //    Debug.LogWarning("MeshRenderer не знайдено у сегменті: " + roadSegments[i].name);
-            //    segmentLengths[i] = 20f; // запасне значення
-            //}
+            
         }
     }
 
@@ -34,7 +29,6 @@ public class RoadLooper : MonoBehaviour
         {
             float segLen = segmentLengths[i];
 
-            // if the segment is behind the car → move it forward
             if (playerCar.position.z - roadSegments[i].position.z > segLen)
             {
                 float maxZ = GetMaxZ();
@@ -47,7 +41,6 @@ public class RoadLooper : MonoBehaviour
         }
     }
 
-    // returns the most distant segment in Z
     private float GetMaxZ()
     {
         float max = roadSegments[0].position.z;
