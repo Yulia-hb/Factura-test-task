@@ -21,11 +21,11 @@ public class Bullet : MonoBehaviour
 
     private void OnDisable()
     {
-        // страховка
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
+
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -33,6 +33,16 @@ public class Bullet : MonoBehaviour
         if (_timer >= lifeTime)
         {
             _pool.Despawn(this);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Health health = collision.gameObject.GetComponent<Health>();
+
+        if (health != null)
+        {
+            health.TakeDamage(10);
         }
     }
 }

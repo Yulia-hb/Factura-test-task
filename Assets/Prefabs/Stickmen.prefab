@@ -9,6 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4681169197760243532}
+  - component: {fileID: 5425905294969289906}
+  - component: {fileID: 1361606220216654183}
+  - component: {fileID: 656190492647266299}
+  - component: {fileID: 8848168631269379746}
+  - component: {fileID: 4672124419576195785}
   m_Layer: 0
   m_Name: Stickmen
   m_TagString: Untagged
@@ -32,6 +37,73 @@ Transform:
   - {fileID: 7136858400722171369}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5425905294969289906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297127455425663205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebe6df516bab0c45bca02b3111426fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyConfig: {fileID: 11400000, guid: 5be7fb267045b9745b7d0b57fdbb7e48, type: 2}
+  _enemyAnimator: {fileID: 1361606220216654183}
+--- !u!114 &1361606220216654183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297127455425663205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6868886890035db4fa8cbb12d7745038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
+--- !u!114 &656190492647266299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297127455425663205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c659240a262d34ea80c3ca65b88d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 5425905294969289906}
+  _car: {fileID: 5970994820189219582, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
+--- !u!114 &8848168631269379746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297127455425663205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c1c3987d86c1349810a1f44d690682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+--- !u!114 &4672124419576195785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297127455425663205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4850a0743c0b1e40a502d38dadd1c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 100
 --- !u!1001 &7242227569086681602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,13 +156,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: stickman
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 56559cc005175794880af5c6ad8527ec, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 56559cc005175794880af5c6ad8527ec, type: 3}
+    - target: {fileID: 5866666021909216657, guid: 56559cc005175794880af5c6ad8527ec, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 94f990044b935d143a7dbae36535a963, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56559cc005175794880af5c6ad8527ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4248276426184410973}
   m_SourcePrefab: {fileID: 100100000, guid: 56559cc005175794880af5c6ad8527ec, type: 3}
 --- !u!4 &7136858400722171369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56559cc005175794880af5c6ad8527ec, type: 3}
   m_PrefabInstance: {fileID: 7242227569086681602}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7512257390431891283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56559cc005175794880af5c6ad8527ec, type: 3}
+  m_PrefabInstance: {fileID: 7242227569086681602}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4248276426184410973
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7512257390431891283}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
