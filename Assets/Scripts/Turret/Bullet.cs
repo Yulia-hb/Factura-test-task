@@ -3,9 +3,10 @@ using Zenject;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float lifeTime = 3f;
+    [SerializeField] private BulletConfig _config; // ?? додаємо
 
     private float _timer;
+    private bool _isDespawned;
     private BulletPool _pool;
 
     [Inject]
@@ -17,8 +18,25 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         _timer = 0f;
+        _isDespawned = false;
     }
 
+
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+
+        if (_timer >= _config.lifetime && !_isDespawned)
+        {
+            Despawn();
+        }
+    }
+
+    private void Despawn()
+    {
+        _isDespawned = true;
+        _pool.Despawn(this);
+    }
     private void OnDisable()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
@@ -26,23 +44,19 @@ public class Bullet : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
     }
 
-    private void Update()
-    {
-        _timer += Time.deltaTime;
-
-        if (_timer >= lifeTime)
-        {
-            _pool.Despawn(this);
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        Health health = collision.gameObject.GetComponent<Health>();
+        Health health = collision.gameObject.GetComponentInParent<Health>();
 
         if (health != null)
         {
-            health.TakeDamage(10);
+            health.TakeDamage(_config.damage);
         }
+
+        if (!_isDespawned)
+        {
+            Despawn();
+        }
+        
     }
 }

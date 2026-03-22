@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -9,14 +9,24 @@ public class Health : MonoBehaviour
 
     public event Action OnDeath;
 
+    private bool _isDead;
+
     private void Awake()
     {
         CurrentHP = _maxHP;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        CurrentHP -= damage;
+        if (_isDead) return; // 🔥 захист
+
+        int dmg = Mathf.RoundToInt(damage);
+        CurrentHP -= dmg;
+
+        Debug.Log($"{gameObject.name} took {dmg} damage | HP: {CurrentHP}");
+
+        // 🔥 ВІЗУАЛЬНИЙ ДЕБАГ (можеш прибрати потім)
+        transform.localScale *= 0.95f;
 
         if (CurrentHP <= 0)
         {
@@ -24,8 +34,15 @@ public class Health : MonoBehaviour
         }
     }
 
+
     private void Die()
     {
+        if (_isDead) return;
+
+        _isDead = true;
+
+        Debug.Log($"{gameObject.name} DIED 💀");
+
         OnDeath?.Invoke();
     }
 }
