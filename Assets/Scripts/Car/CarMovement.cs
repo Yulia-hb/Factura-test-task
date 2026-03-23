@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CarMovement : MonoBehaviour
@@ -6,9 +7,11 @@ public class CarMovement : MonoBehaviour
 
     private bool _isMoving;
 
+    public event Action OnStartMove;
     public void StartMove()
     {
         _isMoving = true;
+        OnStartMove?.Invoke();
     }
 
     private void Update()

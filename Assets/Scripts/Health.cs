@@ -25,8 +25,7 @@ public class Health : MonoBehaviour
 
         Debug.Log($"{gameObject.name} took {dmg} damage | HP: {CurrentHP}");
 
-        // 🔥 ВІЗУАЛЬНИЙ ДЕБАГ (можеш прибрати потім)
-        transform.localScale *= 0.95f;
+        // 🔥 ВІЗУАЛЬНИЙ ДЕБАГ (можеш прибрати потім)        
 
         if (CurrentHP <= 0)
         {

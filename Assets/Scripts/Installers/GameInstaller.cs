@@ -8,10 +8,12 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private TurretAim _turretAim;
     [SerializeField] private TurretShooter _turretShooter;
+    [SerializeField] private Enemy _enemyPrefab;
 
     public override void InstallBindings()
     {      
-        Container.Bind<CarMovement>().FromInstance(_carMovement).AsSingle();
+       
+        Container.Bind<CarMovement>().FromComponentInHierarchy().AsSingle();
         Container.Bind<InputHandler>().FromInstance(_inputHandler).AsSingle();
 
         Container.Bind<GameController>().AsSingle().NonLazy();
@@ -26,5 +28,10 @@ public class GameInstaller : MonoInstaller
             .WithInitialSize(0)
             .FromComponentInNewPrefab(_bulletPrefab)
             .UnderTransformGroup("Bullets");
+
+        Container.BindMemoryPool<Enemy, EnemyPool>()
+           .WithInitialSize(10)
+           .FromComponentInNewPrefab(_enemyPrefab)
+           .UnderTransformGroup("Enemies");
     }
 }

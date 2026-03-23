@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Zenject;
 
 
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
     [SerializeField] private Transform _car;
-    private Vector3 _offset;
-    private float _attackTimer;
-
+    private State _currentState;
     private Health _health;
+
     private bool _isDead;
-    private float _startY;
+    private bool _gameStarted;
+
+    private float _angle;
+    private float _radius;
+    private float _attackTimer;
+    private Vector3 _offset;
 
     private enum State
     {
@@ -20,25 +25,25 @@ public class EnemyController : MonoBehaviour
         Attack
     }
 
-    private State _currentState;
 
     private void Awake()
     {
-          _offset = new Vector3(
-          Random.Range(-2f, 2f),
-          0f,
-         Random.Range(-2f, 2f));
-      
-        _startY = transform.position.y;
+
         _health = GetComponent<Health>();
         _health.OnDeath += OnDeath;
 
         SetState(State.Idle);
-   
+
     }
 
     private void Update()
     {
+        if (!_gameStarted)
+        {
+            SetState(State.Idle);
+            return;
+        }
+
         if (_isDead)
             return;
 
@@ -52,7 +57,14 @@ public class EnemyController : MonoBehaviour
         {
             SetState(State.Run);
 
-            Vector3 direction = (_car.position - transform.position).normalized;
+            Vector3 offset = new Vector3(
+            Mathf.Cos(_angle * Mathf.Deg2Rad),
+            0f,
+            Mathf.Sin(_angle * Mathf.Deg2Rad)
+            ) * _radius;
+
+            Vector3 target = _car.position + offset;
+            Vector3 direction = (target - transform.position).normalized;
 
             // ПОВОРОТ
             if (direction != Vector3.zero)
@@ -66,20 +78,45 @@ public class EnemyController : MonoBehaviour
 
             transform.position += direction * _enemy.Config.moveSpeed * speedMultiplier * Time.deltaTime;
 
-            // 🔥 ФІКС ВИСОТИ
+            // 🔥 АНТИ-СТОЛК (ОСЬ ТУТ)
+            Collider[] hits = Physics.OverlapSphere(transform.position, 1f);
+
+            foreach (var hit in hits)
+            {
+                if (hit.gameObject != gameObject && hit.GetComponent<EnemyController>())
+                {
+                    Vector3 push = (transform.position - hit.transform.position).normalized;
+                    transform.position += push * 0.1f * Time.deltaTime;
+                }
+            }
+
+            // ФІКС ВИСОТИ
             Vector3 pos = transform.position;
-            pos.y = _startY;
+            pos.y = _car.position.y;
             transform.position = pos;
         }
         else
         {
+            Vector3 toCar = (_car.position - transform.position).normalized;
+            float dot = Vector3.Dot(transform.forward, toCar);
+
+            if (dot < 0.7f)
+            {
+                // 🔥 НЕ дивиться → повертається
+                Quaternion lookRotation = Quaternion.LookRotation(toCar);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 10f * Time.deltaTime);
+
+                SetState(State.Run);
+                return;
+            }
+
             SetState(State.Attack);
+
             _attackTimer += Time.deltaTime;
 
             if (_attackTimer >= _enemy.Config.attackCooldown)
             {
                 _attackTimer = 0f;
-
                 AttackHit();
             }
         }
@@ -113,6 +150,25 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+
+    public void SetTarget(Transform car, bool gameStarted = false)
+    {
+        _car = car;
+        _gameStarted = gameStarted;
+
+        _offset = new Vector3(
+            Random.Range(-3f, 3f),
+            0f,
+            Random.Range(-3f, 3f)
+        );
+    }
+
+
+    public void StartGame()
+    {
+        _gameStarted = true;
+    }
+
     private void AttackHit()
     {
         var carHealth = _car.GetComponent<Health>();
@@ -131,11 +187,13 @@ public class EnemyController : MonoBehaviour
 
         StartCoroutine(DisableAfterDeath());
     }
+    
 
     private IEnumerator DisableAfterDeath()
     {
         yield return new WaitForSeconds(2f); // під довжину анімації
         gameObject.SetActive(false);
     }
-}
 
+   
+}

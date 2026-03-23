@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 346894970624509905}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.850773, y: 1.2, z: 88.07653}
+  m_LocalPosition: {x: -3.850773, y: 0, z: 88.07653}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 4602334989749026924}
-  _car: {fileID: 0}
+  _car: {fileID: 5970994820189219582, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
 --- !u!114 &8475497735009460537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c1c3987d86c1349810a1f44d690682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 5
 --- !u!114 &6330716292395071493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,10 +124,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7426891
-  m_Height: 1.8178229
+  m_Radius: 0.86015797
+  m_Height: 2.4758518
   m_Direction: 1
-  m_Center: {x: -0.15085208, y: -0.007009268, z: 0.09183699}
+  m_Center: {x: -0.11920619, y: 1.0929259, z: 0.09183699}
 --- !u!1001 &5722459080750003106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c3ffe8e2958bce488b1ee0e399d12be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8257619
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c3ffe8e2958bce488b1ee0e399d12be, type: 3}
       propertyPath: m_LocalPosition.z

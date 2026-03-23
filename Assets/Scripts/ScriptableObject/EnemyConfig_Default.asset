@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EnemyConfig_Default
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  chaseDistance: 10
+  chaseDistance: 12
   attackDistance: 4
   damage: 5
-  attackCooldown: 1
+  attackCooldown: 1.2
   maxHealth: 100

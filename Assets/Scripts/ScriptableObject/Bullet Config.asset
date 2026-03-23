@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f6478120065b349aa517b86146df07, type: 3}
   m_Name: Bullet Config
   m_EditorClassIdentifier: 
-  speed: 10
-  damage: 20
+  speed: 20
+  damage: 100
   lifetime: 1
