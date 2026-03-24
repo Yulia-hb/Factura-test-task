@@ -33,6 +33,12 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void ResetHealth()
+    {
+        CurrentHP = _maxHP;
+        _isDead = false;
+
+    }
 
     private void Die()
     {

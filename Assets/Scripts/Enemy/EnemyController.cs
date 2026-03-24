@@ -25,15 +25,9 @@ public class EnemyController : MonoBehaviour
         Attack
     }
 
-
     private void Awake()
     {
-
-        _health = GetComponent<Health>();
-        _health.OnDeath += OnDeath;
-
-        SetState(State.Idle);
-
+        _health = GetComponent<Health>();           
     }
 
     private void Update()
@@ -150,19 +144,21 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void ForceUpdateState()
+    {
+        _currentState = (State)(-1); // скидаємо стан
+    }
 
-    public void SetTarget(Transform car, bool gameStarted = false)
+    public void SetTarget(Transform car)
     {
         _car = car;
-        _gameStarted = gameStarted;
-
+      
         _offset = new Vector3(
             Random.Range(-3f, 3f),
             0f,
             Random.Range(-3f, 3f)
         );
     }
-
 
     public void StartGame()
     {
@@ -184,10 +180,23 @@ public class EnemyController : MonoBehaviour
         _enemy.Animator.SetRunning(false);
         _enemy.Animator.SetAttacking(false);
         _enemy.Animator.Die();
-
-        StartCoroutine(DisableAfterDeath());
+        //StartCoroutine(DisableAfterDeath());
     }
-    
+
+    public void ResetState()
+    {
+        _isDead = false;
+        _attackTimer = 0f;
+
+        // 🔥 відписка (на всякий)
+        _health.OnDeath -= OnDeath;
+
+        // 🔥 нова підписка
+        _health.OnDeath += OnDeath;
+
+        SetState(State.Idle);
+
+    }
 
     private IEnumerator DisableAfterDeath()
     {

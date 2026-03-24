@@ -7,4 +7,20 @@ public class Enemy : MonoBehaviour
 
     public EnemyConfig Config => _enemyConfig;
     public EnemyAnimator Animator => _enemyAnimator;
+
+    public void OnSpawned(Transform car)
+    {
+        // Health
+        var health = GetComponent<Health>();
+        health.ResetHealth();
+
+        // Controller
+        var controller = GetComponent<EnemyController>();
+        controller.ResetState();
+        controller.SetTarget(car);
+
+        // Collider (на всякий)
+        foreach (var col in GetComponentsInChildren<Collider>())
+            col.enabled = true;
+    }
 }

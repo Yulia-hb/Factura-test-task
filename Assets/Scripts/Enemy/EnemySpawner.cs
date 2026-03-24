@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -23,16 +24,25 @@ public class EnemySpawner : MonoBehaviour
     private bool _gameStarted;
 
     private List<EnemyController> _enemies = new();
+    private EnemyPool _pool;
+
+    // 🔥 НОВЕ — для росту складності
+    private int _spawnCount = 1;
+    private float _difficultyTimer;
+
+    [Inject]
+    public void Construct(EnemyPool pool)
+    {
+        _pool = pool;
+    }
 
     private void Start()
     {
-        // стартові вороги
         for (int i = 0; i < _startEnemies; i++)
         {
             SpawnEnemy(false);
         }
 
-        // підписка на старт руху
         _carMovement.OnStartMove += StartGame;
     }
 
@@ -40,6 +50,15 @@ public class EnemySpawner : MonoBehaviour
     {
         if (!_gameStarted)
             return;
+
+        // 🔥 РІСТ КІЛЬКОСТІ ВОРОГІВ
+        _difficultyTimer += Time.deltaTime;
+
+        if (_difficultyTimer >= 10f)
+        {
+            _difficultyTimer = 0f;
+            _spawnCount ++; // кожні 10 сек +2 ворог
+        }
 
         _timer += Time.deltaTime;
 
@@ -49,7 +68,12 @@ public class EnemySpawner : MonoBehaviour
 
             if (_currentEnemies < _maxEnemies)
             {
-                SpawnEnemy(true);
+                int count = Mathf.Min(_spawnCount, _maxEnemies - _currentEnemies);
+
+                for (int i = 0; i < count; i++)
+                {
+                    SpawnEnemy(true);
+                }
             }
         }
     }
@@ -58,7 +82,6 @@ public class EnemySpawner : MonoBehaviour
     {
         _gameStarted = true;
 
-        // активуємо всіх існуючих ворогів
         foreach (var enemy in _enemies)
         {
             if (enemy != null)
@@ -70,24 +93,38 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector3 pos = GetSpawnPosition();
 
-        Enemy enemy = Instantiate(_enemyPrefab, pos, Quaternion.identity);
+        Enemy enemy = _pool.Spawn(pos);
+
+        // 🔥 ВСЕ РЕСЕТИМО В ОДНОМУ МІСЦІ
+        enemy.OnSpawned(_car);
 
         EnemyController controller = enemy.GetComponent<EnemyController>();
 
-        controller.SetTarget(_car);
-
         if (active)
-            controller.StartGame(); // нові одразу активні
+        {
+            controller.StartGame();
+            controller.ForceUpdateState();
+        }
 
         _enemies.Add(controller);
-
         _currentEnemies++;
 
-        enemy.GetComponent<Health>().OnDeath += () =>
+        var health = enemy.GetComponent<Health>();
+
+        System.Action deathAction = null;
+
+        deathAction = () =>
         {
             _currentEnemies--;
+
             _enemies.Remove(controller);
+
+            health.OnDeath -= deathAction;
+
+            _pool.Despawn(enemy);
         };
+
+        health.OnDeath += deathAction;
     }
 
     private Vector3 GetSpawnPosition()
@@ -105,4 +142,3 @@ public class EnemySpawner : MonoBehaviour
         return pos;
     }
 }
-
