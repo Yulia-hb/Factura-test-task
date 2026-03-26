@@ -9,6 +9,10 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private TurretAim _turretAim;
     [SerializeField] private TurretShooter _turretShooter;
     [SerializeField] private Enemy _enemyPrefab;
+    [SerializeField] private EndGameView _endGameView;
+    [SerializeField] private GameUIView _gameUIView;
+    [SerializeField] private RoadLooper _roadLooper;
+
 
     public override void InstallBindings()
     {      
@@ -23,6 +27,13 @@ public class GameInstaller : MonoInstaller
 
         Container.BindInterfacesTo<TurretAimController>().AsSingle();
         Container.BindInterfacesTo<TurretShootController>().AsSingle();
+
+        Container.Bind<EndGameView>().FromInstance(_endGameView).AsSingle();
+        Container.Bind<EndGamePresenter>().AsSingle();
+
+        Container.Bind<GameUIView>().FromInstance(_gameUIView).AsSingle();
+        Container.Bind<GameUIPresenter>().AsSingle();
+        Container.Bind<RoadLooper>().FromInstance(_roadLooper).AsSingle();
 
         Container.BindMemoryPool<Bullet, BulletPool>()
             .WithInitialSize(0)

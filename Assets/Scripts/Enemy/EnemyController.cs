@@ -5,6 +5,13 @@ using Zenject;
 
 public class EnemyController : MonoBehaviour
 {
+    private GameUIPresenter _uiPresenter;
+
+    [Inject]
+    public void Construct(GameUIPresenter presenter)
+    {
+        _uiPresenter = presenter;
+    }
     [SerializeField] private Enemy _enemy;
     [SerializeField] private Transform _car;
     private State _currentState;
@@ -180,6 +187,7 @@ public class EnemyController : MonoBehaviour
         _enemy.Animator.SetRunning(false);
         _enemy.Animator.SetAttacking(false);
         _enemy.Animator.Die();
+        _uiPresenter.AddCoins(100);
         //StartCoroutine(DisableAfterDeath());
     }
 

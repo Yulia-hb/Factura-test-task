@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections;
+using Zenject;
 
 public class RoadLooper : MonoBehaviour
 {
+    [Inject] private EndGamePresenter _presenter;
+
     [SerializeField] private Transform playerCar;
     [SerializeField] private Transform[] roadSegments;
     [SerializeField] private CarMovement _carMovement;
@@ -89,6 +92,9 @@ public class RoadLooper : MonoBehaviour
         yield return new WaitForSeconds(75f / 5f); // 🔥 піджени під довжину сегмента
 
         _carMovement.StopMove();
+
+        _presenter.Win();       // 🔥 WIN ТУТ
+        Time.timeScale = 0f;
     }
 
     private void SetRenderers(Transform segment, bool state)
@@ -97,5 +103,14 @@ public class RoadLooper : MonoBehaviour
 
         foreach (var r in renderers)
             r.enabled = state;
+    }
+
+    public float GetProgress()
+    {
+        float totalLength = (2 + maxLoops) * 75f;
+
+        float currentZ = playerCar.position.z;
+
+        return Mathf.Clamp01(currentZ / totalLength);
     }
 }
