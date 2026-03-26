@@ -5,11 +5,11 @@ public class GameUIPresenter
     private readonly GameUIView _view;
     private readonly RoadLooper _road;
 
-    private float _currentProgress;
-
     private readonly Color _startColor = Color.red;
     private readonly Color _endColor = Color.green;
 
+    private float _currentProgress;
+    private bool _isPaused;
     public GameUIPresenter(GameUIView view, RoadLooper road)
     {
         _view = view;
@@ -42,6 +42,8 @@ public class GameUIPresenter
 
     private void Pause()
     {
-        Time.timeScale = 0f;
+        _isPaused = !_isPaused;
+
+        Time.timeScale = _isPaused ? 0f : 1f;
     }
 }

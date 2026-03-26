@@ -31,4 +31,13 @@ public class GameUIView : MonoBehaviour
     {
         _progressFill.color = color;
     }
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
 }

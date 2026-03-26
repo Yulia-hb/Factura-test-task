@@ -1,33 +1,34 @@
-
-
+﻿
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EndGamePresenter
 {
     private readonly EndGameView _view;
+    private readonly GameUIView _gameView;
 
-    public EndGamePresenter(EndGameView view)
+    public EndGamePresenter(EndGameView view, GameUIView gameView)
     {
         _view = view;
+        _gameView = gameView;
 
         _view.OnRestartClicked += Restart;
     }
 
     public void Win()
     {
+        _gameView.Hide();   // 🔥 сховали HUD
         _view.ShowWin();
     }
 
     public void Lose()
     {
+        _gameView.Hide();   // 🔥 сховали HUD
         _view.ShowLose();
     }
 
     private void Restart()
     {
         Time.timeScale = 1f;
-
-        SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }
