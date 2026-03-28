@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
-    [SerializeField] private int damage = 20;
+    [SerializeField] private int damage = 1;
 
     private void OnCollisionEnter(Collision collision)
     {

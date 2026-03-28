@@ -6,7 +6,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private static readonly int IsRunning = Animator.StringToHash("IsRunning");
     private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
-    private static readonly int DieHash = Animator.StringToHash("Die"); // 🔥 Trigger
+    private static readonly int DieHash = Animator.StringToHash("IsDeath"); // 🔥 Trigger
 
     public void SetRunning(bool value)
     {

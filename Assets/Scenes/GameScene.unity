@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13052616, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: 7.8798885, y: 5.01, z: -4.58}
+  m_LocalPosition: {x: 7.8798885, y: 5, z: -4.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1886925198}
-  _offset: {x: 0, y: 5, z: -8}
+  _offset: {x: 0, y: 4, z: -8}
   _smoothSpeed: 5
 --- !u!1 &410087039
 GameObject:
@@ -409,6 +409,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &600863124 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4359639592467143290, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
+  m_PrefabInstance: {fileID: 8382020437672859119}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &730717262 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8182230682919070496, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
@@ -998,11 +1003,12 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 4602334989749026924, guid: 1515c4a0f1896e347b1f7ac0b961cabc, type: 3}
   _car: {fileID: 1886925198}
   _carMovement: {fileID: 730717262}
+  _levelLength: 375
+  _maxTotalEnemies: 80
   _startEnemies: 4
-  _maxEnemies: 10
   _spawnInterval: 2
   _spawnForwardMin: 12
-  _spawnForwardMax: 20
+  _spawnForwardMax: 16
   _spawnSideRange: 4
 --- !u!4 &1886925198 stripped
 Transform:
@@ -1392,10 +1398,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1665494904}
     m_Modifications:
-    - target: {fileID: 46030611179435927, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 131151551834980716, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1448,6 +1450,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCar
       objectReference: {fileID: 0}
+    - target: {fileID: 8182230682919070496, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
+      propertyPath: _smoke
+      value: 
+      objectReference: {fileID: 600863124}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

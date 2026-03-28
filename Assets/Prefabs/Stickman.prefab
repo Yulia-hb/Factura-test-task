@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8475497735009460537}
   - component: {fileID: 6330716292395071493}
   - component: {fileID: 2903842877192437167}
+  - component: {fileID: 2564917535963631602}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -91,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c1c3987d86c1349810a1f44d690682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 1
 --- !u!114 &6330716292395071493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346894970624509905}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3ba31e708eff4af47b2892effb58e466, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -124,10 +125,37 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.86015797
+  m_Radius: 0.9
   m_Height: 2.4758518
   m_Direction: 1
   m_Center: {x: -0.11920619, y: 1.0929259, z: 0.09183699}
+--- !u!54 &2564917535963631602
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346894970624509905}
+  serializedVersion: 4
+  m_Mass: 5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 116
+  m_CollisionDetection: 1
 --- !u!1001 &5722459080750003106
 PrefabInstance:
   m_ObjectHideFlags: 0

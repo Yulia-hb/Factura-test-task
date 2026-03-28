@@ -61,7 +61,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsDead
+    m_ConditionEvent: IsDeath
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2480611054947744402}
@@ -69,7 +69,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -139,7 +139,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 2068142964604885001}
-    m_Position: {x: 390, y: 70, z: 0}
+    m_Position: {x: 400, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5769849611967941763}
     m_Position: {x: 150, y: 70, z: 0}
@@ -148,7 +148,7 @@ AnimatorStateMachine:
     m_Position: {x: 150, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2480611054947744402}
-    m_Position: {x: 620, y: 70, z: 0}
+    m_Position: {x: 620, y: 60, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -6566453573587611873}
@@ -181,7 +181,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: IsDead
+  - m_Name: IsDeath
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,17 +10,40 @@ public class Enemy : MonoBehaviour
 
     public void OnSpawned(Transform car)
     {
-        // Health
         var health = GetComponent<Health>();
         health.ResetHealth();
 
-        // Controller
         var controller = GetComponent<EnemyController>();
         controller.ResetState();
+        GetComponent<Rigidbody>().isKinematic = true;
         controller.SetTarget(car);
 
-        // Collider (�� ������)
         foreach (var col in GetComponentsInChildren<Collider>())
             col.enabled = true;
+
+        // 🔥 ФІКС ФІЗИКИ
+        var rb = GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.angularVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.position = transform.position;
+        }
     }
+    //public void OnSpawned(Transform car)
+    //{
+    //    // Health
+    //    var health = GetComponent<Health>();
+    //    health.ResetHealth();
+
+    //    // Controller
+    //    var controller = GetComponent<EnemyController>();
+    //    controller.ResetState();
+    //    controller.SetTarget(car);
+
+    //    // Collider (на всякий)
+    //    foreach (var col in GetComponentsInChildren<Collider>())
+    //        col.enabled = true;
+    //}
 }
