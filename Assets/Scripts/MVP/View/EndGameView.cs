@@ -7,7 +7,6 @@ public class EndGameView : MonoBehaviour
 {
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
-
     [SerializeField] private Button _winRestartButton;
     [SerializeField] private Button _loseRestartButton;
 

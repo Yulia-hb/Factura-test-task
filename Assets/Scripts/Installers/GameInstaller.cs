@@ -13,7 +13,6 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private GameUIView _gameUIView;
     [SerializeField] private RoadLooper _roadLooper;
 
-
     public override void InstallBindings()
     {      
        

@@ -12,7 +12,7 @@ public class RoadLooper : MonoBehaviour
     [SerializeField] private CarMovement _carMovement;
 
     [Header("Level Settings")]
-    [SerializeField] private int maxLoops = 3; // 🔥 ще 3 сегменти після старту
+    [SerializeField] private int maxLoops = 3;
 
     private float[] segmentLengths;
     private int _currentLoops;
@@ -47,7 +47,6 @@ public class RoadLooper : MonoBehaviour
                 {
                     _isFinished = true;
 
-                    // 🔥 НЕ ЗУПИНЯЄМО ОДРАЗУ
                     StartCoroutine(StopAfterLastSegment());
 
                     return;
@@ -56,8 +55,6 @@ public class RoadLooper : MonoBehaviour
                 float maxZ = GetMaxZ();
 
                 var segment = roadSegments[i];
-
-                // 🔥 ВИМКНУЛИ РЕНДЕР
                 SetRenderers(segment, false);
 
                 segment.position = new Vector3(
@@ -65,8 +62,6 @@ public class RoadLooper : MonoBehaviour
                     segment.position.y,
                     maxZ + segLen - 0.01f
                 );
-
-                // 🔥 ВКЛЮЧИЛИ НАЗАД
                 SetRenderers(segment, true);
 
                 _currentLoops++;
@@ -89,11 +84,10 @@ public class RoadLooper : MonoBehaviour
 
     private IEnumerator StopAfterLastSegment()
     {
-        yield return new WaitForSeconds(75f / 5f); // 🔥 піджени під довжину сегмента
+        yield return new WaitForSeconds(75f / 5f);
 
         _carMovement.StopMove();
-
-        _presenter.Win();       // 🔥 WIN ТУТ
+        _presenter.Win();
         Time.timeScale = 0f;
     }
 

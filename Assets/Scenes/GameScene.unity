@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1886925198}
-  _offset: {x: 0, y: 4, z: -8}
+  _offset: {x: 0, y: 7, z: -8}
   _smoothSpeed: 5
 --- !u!1 &410087039
 GameObject:
@@ -409,11 +409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!198 &600863124 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4359639592467143290, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
-  m_PrefabInstance: {fileID: 8382020437672859119}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &730717262 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8182230682919070496, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
@@ -1004,7 +999,7 @@ MonoBehaviour:
   _car: {fileID: 1886925198}
   _carMovement: {fileID: 730717262}
   _levelLength: 375
-  _maxTotalEnemies: 80
+  _maxTotalEnemies: 90
   _startEnemies: 4
   _spawnInterval: 2
   _spawnForwardMin: 12
@@ -1450,10 +1445,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCar
       objectReference: {fileID: 0}
-    - target: {fileID: 8182230682919070496, guid: a38a921210f65d84f9e0fc57e7a8a695, type: 3}
-      propertyPath: _smoke
-      value: 
-      objectReference: {fileID: 600863124}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

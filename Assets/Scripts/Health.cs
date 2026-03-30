@@ -6,9 +6,7 @@ public class Health : MonoBehaviour
     [SerializeField] private int _maxHP = 100;
 
     public int CurrentHP { get; private set; }
-
     public event Action OnDeath;
-
     private bool _isDead;
 
     private void Awake()
@@ -18,14 +16,12 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (_isDead) return; // 🔥 захист
+        if (_isDead) return; 
 
         int dmg = Mathf.RoundToInt(damage);
         CurrentHP -= dmg;
 
-        Debug.Log($"{gameObject.name} took {dmg} damage | HP: {CurrentHP}");
-
-        // 🔥 ВІЗУАЛЬНИЙ ДЕБАГ (можеш прибрати потім)        
+        Debug.Log($"{gameObject.name} took {dmg} damage | HP: {CurrentHP}");       
 
         if (CurrentHP <= 0)
         {

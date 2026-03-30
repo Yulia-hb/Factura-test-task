@@ -1,4 +1,4 @@
-using Zenject;
+﻿using Zenject;
 using UnityEngine;
 
 public class TurretShootController : IFixedTickable
@@ -32,9 +32,11 @@ public class TurretShootController : IFixedTickable
 
         _timer += Time.fixedDeltaTime;
 
-        if (_timer < _shootDelay)
-            return;
+        if (_timer >= _shootDelay)
+        {
+            _timer -= _shootDelay;
 
-        _shooter.Tick();
+            _shooter.Tick();
+        }
     }
 }

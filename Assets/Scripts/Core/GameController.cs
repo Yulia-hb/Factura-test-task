@@ -28,8 +28,26 @@ public class GameController
         if (CurrentState != GameState.Waiting)
             return;
 
-        CurrentState = GameState.Playing;
+        SetState(GameState.Playing);
+    }
 
-        _carMovement.StartMove();
+    public void SetState(GameState newState)
+    {
+        if (CurrentState == newState)
+            return;
+
+        CurrentState = newState;
+
+        switch (CurrentState)
+        {
+            case GameState.Playing:
+                _carMovement.StartMove();
+                break;
+
+            case GameState.Win:
+            case GameState.Lose:
+                _carMovement.StopMove();
+                break;
+        }
     }
 }

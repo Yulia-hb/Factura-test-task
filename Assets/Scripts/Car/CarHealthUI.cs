@@ -22,22 +22,17 @@ public class CarHealthUI : MonoBehaviour
 
         _slider.maxValue = maxHP;
         _slider.value = maxHP;
-
         _targetValue = maxHP;
     }
 
     private void Update()
     {
-        // 🔥 оновлюємо цільове значення
         _targetValue = _carHealth.CurrentHP;
 
-        // 🔥 плавне зменшення
         _slider.value = Mathf.Lerp(_slider.value, _targetValue, Time.deltaTime * _smoothSpeed);
 
-        // 🔥 нормалізоване HP (0-1)
         float normalized = _slider.value / _slider.maxValue;
 
-        // 🔥 колір від зеленого до червоного
         _fillImage.color = Color.Lerp(_lowHPColor, _fullHPColor, normalized);
     }
 }

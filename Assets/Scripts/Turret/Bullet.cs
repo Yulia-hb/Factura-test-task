@@ -3,7 +3,7 @@ using Zenject;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private BulletConfig _config; // ?? додаємо
+    [SerializeField] private BulletConfig _config;
 
     private float _timer;
     private bool _isDespawned;
@@ -20,7 +20,6 @@ public class Bullet : MonoBehaviour
         _timer = 0f;
         _isDespawned = false;
     }
-
 
     private void Update()
     {

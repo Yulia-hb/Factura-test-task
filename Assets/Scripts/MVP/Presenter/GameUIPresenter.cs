@@ -22,12 +22,10 @@ public class GameUIPresenter
     {
         float target = _road.GetProgress();
 
-        // 🔥 плавність
         _currentProgress = Mathf.Lerp(_currentProgress, target, deltaTime * 5f);
 
         _view.SetProgress(_currentProgress);
 
-        // 🔥 колір
         Color color = Color.Lerp(Color.red, Color.green, _currentProgress);
         _view.SetProgressColor(color);
     }

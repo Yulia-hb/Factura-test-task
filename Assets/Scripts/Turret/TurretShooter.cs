@@ -6,7 +6,6 @@ public class TurretShooter : MonoBehaviour
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private float _shootForce = 20f;
     [SerializeField] private float _fireRate = 0.2f;
-    private float _timer;
 
     private BulletPool _bulletPool;
 
@@ -18,13 +17,7 @@ public class TurretShooter : MonoBehaviour
 
     public void Tick()
     {
-        _timer += Time.deltaTime;
-
-        if (_timer >= _fireRate)
-        {
-            Shoot();
-            _timer = 0f;
-        }
+        Shoot();
     }
 
     private void Shoot()
@@ -38,6 +31,15 @@ public class TurretShooter : MonoBehaviour
 
         rigidbody.linearVelocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
-        rigidbody.linearVelocity = _shootPoint.forward * _shootForce;
+
+        Vector3 spread = new Vector3(
+        Random.Range(-0.05f, 0.05f),
+        Random.Range(-0.03f, 0.03f),
+        0f
+        );
+
+        Vector3 direction = (_shootPoint.forward + spread).normalized;
+
+        rigidbody.linearVelocity = direction * _shootForce;
     }
 }

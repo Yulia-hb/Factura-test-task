@@ -24,6 +24,6 @@ public class CarDeathHandler : MonoBehaviour
 
         _presenter.Lose();
 
-        Time.timeScale = 0f; // 🔥 стоп гри
+        Time.timeScale = 0f;
     }
 }

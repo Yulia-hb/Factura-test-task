@@ -16,13 +16,13 @@ public class EndGamePresenter
 
     public void Win()
     {
-        _gameView.Hide();   // 🔥 сховали HUD
+        _gameView.Hide();
         _view.ShowWin();
     }
 
     public void Lose()
     {
-        _gameView.Hide();   // 🔥 сховали HUD
+        _gameView.Hide();
         _view.ShowLose();
     }
 
