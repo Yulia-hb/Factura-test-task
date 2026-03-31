@@ -159,15 +159,12 @@ public class EnemyController : MonoBehaviour
 
         float forward = Random.Range(3f, 6f);
 
-        //_offset = new Vector3(
-        //    side,
-        //    0f,
-        //    forward
-        //);
-        Vector3 forwardDir = _car.forward;
-        Vector3 rightDir = _car.right;
-
-        _offset = forwardDir * forward + rightDir * side;
+        _offset = new Vector3(
+            side,
+            0f,
+            forward
+        );
+        
     }
 
     public void StartGame()
