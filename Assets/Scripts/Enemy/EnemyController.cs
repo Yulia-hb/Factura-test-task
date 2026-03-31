@@ -64,7 +64,6 @@ public class EnemyController : MonoBehaviour
         {
             SetState(State.Run);
 
-            Vector3 target = _car.position + _offset;
             Vector3 direction = (_car.position - transform.position).normalized;
 
             if (direction != Vector3.zero)
@@ -160,11 +159,15 @@ public class EnemyController : MonoBehaviour
 
         float forward = Random.Range(3f, 6f);
 
-        _offset = new Vector3(
-            side,
-            0f,
-            forward
-        );
+        //_offset = new Vector3(
+        //    side,
+        //    0f,
+        //    forward
+        //);
+        Vector3 forwardDir = _car.forward;
+        Vector3 rightDir = _car.right;
+
+        _offset = forwardDir * forward + rightDir * side;
     }
 
     public void StartGame()
